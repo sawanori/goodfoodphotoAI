@@ -4,7 +4,7 @@ import { verifyAuth } from '../middleware/auth';
 import { getGeminiClient } from '../services/geminiClient';
 import { formatMultipleImages, validateImage, AspectRatio } from '../services/imageProcessor';
 import { checkQuota, incrementUsage, getUserQuota } from '../services/quotaManager';
-import { firebaseAdmin } from '../firebase';
+import { getFirestore, firebaseAdmin } from '../firebase';
 
 // Multer設定 (メモリストレージ)
 const upload = multer({
@@ -37,7 +37,7 @@ const logGeneration = async (
   generatedImages: string[]
 ): Promise<void> => {
   try {
-    const db = firebaseAdmin.firestore();
+    const db = getFirestore();
     await db.collection('generations').add({
       userId,
       aspectRatio,

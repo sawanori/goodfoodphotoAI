@@ -1,6 +1,6 @@
-import { firebaseAdmin } from '../firebase';
+import { getFirestore, firebaseAdmin } from '../firebase';
 
-const db = firebaseAdmin.firestore();
+const db = getFirestore();
 
 /**
  * ユーザーのクォータ情報

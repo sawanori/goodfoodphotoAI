@@ -35,6 +35,8 @@ coverage/
 *.key
 service-account*.json
 firebase-adminsdk*.json
+serviceAccountKey.json
+serviceAccountKey.json:Zone.Identifier
 
 # Temporary files
 tmp/

@@ -5,6 +5,7 @@ import admin from 'firebase-admin';
 // ローカル開発ではサービスアカウントキーファイルが必要
 
 let initialized = false;
+let _db: admin.firestore.Firestore | null = null;
 
 export function initializeFirebase() {
   if (!initialized) {
@@ -20,5 +21,20 @@ export function initializeFirebase() {
 // インスタンスをエクスポート
 export const firebaseAdmin = admin;
 
-// Firestoreインスタンスをエクスポート
-export const db = admin.firestore();
+// Firestoreインスタンスを遅延初期化でエクスポート
+export function getFirestore(): admin.firestore.Firestore {
+  if (!_db) {
+    if (!initialized) {
+      initializeFirebase();
+    }
+    _db = admin.firestore();
+  }
+  return _db;
+}
+
+// 後方互換性のためのエイリアス（非推奨）
+export const db = {
+  get instance() {
+    return getFirestore();
+  }
+};

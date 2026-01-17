@@ -1,12 +1,12 @@
 import { Request, Response, Router } from 'express';
 import { verifyAuth } from '../middleware/auth';
-import { firebaseAdmin } from '../firebase';
+import { getFirestore } from '../firebase';
 import {
   validateReceipt,
   updateSubscriptionFromReceipt,
 } from '../services/receiptValidator';
 
-const db = firebaseAdmin.firestore();
+const db = getFirestore();
 const router = Router();
 
 /**

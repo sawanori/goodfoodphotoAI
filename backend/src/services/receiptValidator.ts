@@ -1,7 +1,7 @@
 import iap from 'node-apple-receipt-verify';
-import { firebaseAdmin } from '../firebase';
+import { getFirestore } from '../firebase';
 
-const db = firebaseAdmin.firestore();
+const db = getFirestore();
 
 /**
  * Apple IAPレシート検証の初期化
